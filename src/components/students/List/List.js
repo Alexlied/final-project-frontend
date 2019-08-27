@@ -1,21 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 export default ({ users }) => {
   const list = users.map(user => (
-    <li key={user._id}>
-      <Link to={`/users/${user._id}/posts`}>
-        {user.username}: {user.posts.length} Posts
-      </Link>
-    </li>
+    <div className="card-body" key={user._id}>
+      <span>
+        {`${user.firstname} ${user.lastname} - ${user.email}`}
+      </span>
+    </div>
   ))
 
   return (
     <>
       <h1>All Students</h1>
-      <ul>
-        { list }
-      </ul>
+      <div>
+        {list}
+      </div>
     </>
   )
 }

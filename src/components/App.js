@@ -10,14 +10,15 @@ import Header from './shared/Header'
 import Navigation from './shared/Navigation/Navigation'
 import Login from './auth/Login.Form'
 import Signup from './auth/Signup.Form'
-import UsersContainer from './students/Container'
+import StudentsContainer from './students/Container'
 
 class App extends React.Component {
   constructor () {
     super()
     this.state = {
       currentUserId: null,
-      loading: true
+      loading: true,
+      admin: false
     }
 
     this.loginUser = this.loginUser.bind(this)
@@ -39,7 +40,7 @@ class App extends React.Component {
     await token.setToken(response)
     
     const profile = await auth.profile()
-    this.setState({ currentUserId: profile.user._id })
+    this.setState({ currentUserId: profile.user._id, admin: profile.user.admin })
   }
 
   logoutUser () {
@@ -64,7 +65,8 @@ class App extends React.Component {
         <Header />
         <Navigation
           currentUserId={currentUserId}
-          logoutUser={this.logoutUser} />
+          logoutUser={this.logoutUser}
+          admin={this.admin} />
         <Switch>
           <Route path='/login' exact component={() => {
             return this.state.currentUserId ? <Redirect to='/users' /> : <Login onSubmit={this.loginUser} />
@@ -75,7 +77,7 @@ class App extends React.Component {
 
           <Route path='/users' render={() => {
             return this.state.currentUserId
-              ? <UsersContainer currentUserId={currentUserId} />
+              ? <StudentsContainer currentUserId={currentUserId} />
               : <Redirect to='/login' />
           }} />
 
