@@ -11,9 +11,10 @@ import Navigation from './shared/Navigation/Navigation'
 import Login from './auth/Login.Form'
 import Signup from './auth/Signup.Form'
 import StudentsContainer from './students/Container'
+import AssignmentsContainer from './assignments/Container'
 
 class App extends React.Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {
       currentUserId: null,
@@ -26,7 +27,7 @@ class App extends React.Component {
     this.signupUser = this.signupUser.bind(this)
   }
 
-  async componentDidMount () {
+  async componentDidMount() {
     if (token.getToken()) {
       const { user } = await auth.profile();
       this.setState({ currentUserId: user._id, loading: false, admin: user.admin });
@@ -35,28 +36,28 @@ class App extends React.Component {
     }
   }
 
-  async loginUser (user) {
+  async loginUser(user) {
     const response = await auth.login(user)
     await token.setToken(response)
-    
+
     const profile = await auth.profile()
     this.setState({ currentUserId: profile.user._id, admin: profile.user.admin })
   }
 
-  logoutUser () {
+  logoutUser() {
     token.clearToken()
     this.setState({ currentUserId: null })
   }
 
-  async signupUser (user) {
+  async signupUser(user) {
     const response = await auth.signup(user)
     await token.setToken(response)
-    
+
     const profile = await auth.profile()
     this.setState({ currentUserId: profile.user._id, admin: profile.user.admin })
   }
 
-  render () {
+  render() {
     const { currentUserId, loading, admin } = this.state
     if (loading) return <span />
 
@@ -69,15 +70,21 @@ class App extends React.Component {
           admin={admin} />
         <Switch>
           <Route path='/login' exact component={() => {
-            return this.state.currentUserId ? <Redirect to='/users' /> : <Login onSubmit={this.loginUser} />
+            return this.state.currentUserId ? <Redirect to='/students' /> : <Login onSubmit={this.loginUser} />
           }} />
           <Route path='/signup' exact component={() => {
-            return this.state.currentUserId ? <Redirect to='/users' /> : <Signup onSubmit={this.signupUser} />
+            return this.state.currentUserId ? <Redirect to='/students' /> : <Signup onSubmit={this.signupUser} />
           }} />
 
-          <Route path='/users' render={() => {
+          <Route path='/students' render={() => {
             return this.state.currentUserId
               ? <StudentsContainer currentUserId={currentUserId} />
+              : <Redirect to='/login' />
+          }} />
+
+          <Route path='/' render={() => {
+            return this.state.currentUserId
+              ? <AssignmentsContainer currentUserId={currentUserId} />
               : <Redirect to='/login' />
           }} />
 

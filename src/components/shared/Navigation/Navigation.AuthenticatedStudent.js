@@ -9,7 +9,7 @@ export default ({ logout }) => {
         <Link className='nav-link' to='/'>Home</Link>
       </li>
       <li className='nav-item'>
-        <Link className='nav-link' to='/users'>
+        <Link className='nav-link' to='/students'>
           All Students
         </Link>
       </li>

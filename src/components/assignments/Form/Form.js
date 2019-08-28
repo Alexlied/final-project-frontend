@@ -1,21 +1,21 @@
 import React from 'react'
 
 export default class Form extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     const { assignment = {} } = this.props
-    const { content = '', emotion = '' } = assignment
-    this.state = { content, emotion }
+    const { title = '', link = '', description = '' } = assignment
+    this.state = { title, link, description }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange ({ target: { name, value } }) {
+  handleChange({ target: { name, value } }) {
     this.setState({ [name]: value })
   }
 
-  handleSubmit (e) {
+  handleSubmit(e) {
     e.preventDefault()
     const { assignment } = this.props
 
@@ -27,28 +27,38 @@ export default class Form extends React.Component {
     }
   }
 
-  render () {
+  render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <div className='form-group'>
-          <label htmlFor='emotion'>Emotion</label>
+          <label htmlFor='title'>Assignment Title</label>
           <input
             className='form-control'
-            id='emotion'
+            id='title'
             onChange={this.handleChange}
-            name='emotion'
+            name='title'
             type='text'
-            value={this.state.emotion} />
+            value={this.state.title} />
         </div>
         <div className='form-group'>
-          <label htmlFor='content'>Content</label>
+          <label htmlFor='link'>Project Link</label>
+          <input
+            className='form-control'
+            id='link'
+            onChange={this.handleChange}
+            name='link'
+            type='text'
+            value={this.state.link} />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='description'>Project Description</label>
           <textarea
             className='form-control'
-            id='content'
+            id='description'
             onChange={this.handleChange}
-            name='content'
+            name='description'
             type='text'
-            value={this.state.content} />
+            value={this.state.description} />
         </div>
         <button type='submit' className='btn btn-primary'>Submit</button>
       </form>

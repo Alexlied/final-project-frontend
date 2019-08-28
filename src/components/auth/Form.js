@@ -20,7 +20,7 @@ class Form extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     this.props.onSubmit(this.state)
-      .then(() => this.props.history.push('/users'))
+      .then(() => this.props.history.push('/students'))
   }
 
   render() {

@@ -8,7 +8,7 @@ export default ({ currentUserId, destroyAssignment, assignment, user }) => (
       currentUserId === user._id
       && (
         <>
-          <Link className='btn btn-link' to={`/users/${user._id}/assignments/${assignment._id}/edit`}>Edit Assignment</Link>
+          <Link className='btn btn-link' to={`/students/${user._id}/assignments/${assignment._id}/edit`}>Edit Assignment</Link>
           <button
             className='btn btn-link text-danger'
             onClick={() => destroyAssignment(assignment)}>
