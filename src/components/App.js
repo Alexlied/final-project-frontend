@@ -29,7 +29,7 @@ class App extends React.Component {
   async componentDidMount () {
     if (token.getToken()) {
       const { user } = await auth.profile();
-      this.setState({ currentUserId: user._id, loading: false });
+      this.setState({ currentUserId: user._id, loading: false, admin: user.admin });
     } else {
       this.setState({ loading: false })
     }
@@ -53,11 +53,11 @@ class App extends React.Component {
     await token.setToken(response)
     
     const profile = await auth.profile()
-    this.setState({ currentUserId: profile.user._id })
+    this.setState({ currentUserId: profile.user._id, admin: profile.user.admin })
   }
 
   render () {
-    const { currentUserId, loading } = this.state
+    const { currentUserId, loading, admin } = this.state
     if (loading) return <span />
 
     return (
@@ -66,7 +66,7 @@ class App extends React.Component {
         <Navigation
           currentUserId={currentUserId}
           logoutUser={this.logoutUser}
-          admin={this.admin} />
+          admin={admin} />
         <Switch>
           <Route path='/login' exact component={() => {
             return this.state.currentUserId ? <Redirect to='/users' /> : <Login onSubmit={this.loginUser} />
