@@ -6,7 +6,7 @@ export default ({ onSubmit }) => (
     <section className='row justify-content-md-center'>
       <div className='col col-lg-5'>
         <h1>Signup</h1>
-        <Form onSubmit={onSubmit} />
+        <Form onSubmit={onSubmit} formType={'signup'} />
       </div>
     </section>
   </main>
