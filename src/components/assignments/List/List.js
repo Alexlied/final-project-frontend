@@ -6,12 +6,13 @@ export default ({ currentUserId, destroyAssignment, user }) => {
   const assignments = user.assignments.map(assignment => (
     <div key={assignment._id} className='card'>
       <div className='card-body'>
-        <p className='card-text'>{assignment.content}</p>
+        {/* <p className='card-text'>{assignment.content}</p>
         {assignment.emotion === '' ? <p></p> :
           <blockquote className='blockquote mb-0'>
             <footer className='blockquote-footer'>Was feeling: {assignment.emotion}</footer>
           </blockquote>
-        }
+        } */}
+        *Assignment info here*
       </div>
       <Actions
         currentUserId={currentUserId}

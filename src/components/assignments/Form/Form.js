@@ -38,6 +38,7 @@ export default class Form extends React.Component {
             onChange={this.handleChange}
             name='title'
             type='text'
+            required
             value={this.state.title} />
         </div>
         <div className='form-group'>
@@ -48,6 +49,7 @@ export default class Form extends React.Component {
             onChange={this.handleChange}
             name='link'
             type='text'
+            required
             value={this.state.link} />
         </div>
         <div className='form-group'>
