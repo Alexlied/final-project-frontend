@@ -11,10 +11,7 @@ export default ({ users }) => {
 
   return (
     <>
-      <h1>All Students</h1>
-      <div>
         {list}
-      </div>
     </>
   )
 }
