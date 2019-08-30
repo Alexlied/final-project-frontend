@@ -2,39 +2,33 @@ import React from 'react'
 
 import Actions from './List.Actions'
 
-export default ({ currentUserId, destroyAssignment, user }) => {
-  const assignments = user.map(assignment => (
+export default ({ currentUserId, destroyAssignment, assignments }) => {
+  const list = assignments.map(assignment => (
     <div key={assignment._id} className='card'>
       <div className='card-body'>
-        {/* <p className='card-text'>{assignment.content}</p>
-        {assignment.emotion === '' ? <p></p> :
-          <blockquote className='blockquote mb-0'>
-            <footer className='blockquote-footer'>Was feeling: {assignment.emotion}</footer>
-          </blockquote>
-        } */}
-        *Assignment info here*
+        <h2 className='card-title'>{assignment.title}</h2>
+        <p className='card-text'>{assignment.description}</p>
+        <p className='card-text'><a href={assignment.link}>Project Link</a></p>
       </div>
-      <Actions
+      {/* <Actions
         currentUserId={currentUserId}
         destroyPost={destroyAssignment}
         assignment={assignment}
-        user={user} />
+        user={user}
+         /> */}
     </div>
   ))
 
-  if (assignments.length === 0) {
+  if (list.length === 0) {
     return (
       <>
-        {/* <h1 className='mb-4'>{user.username}'s Assignments</h1> */}
-        <p>No assignments found</p>'
-        <p>{assignments}</p>
+        <h2>No assignments found</h2>
       </>
     )
   } else {
     return (
       <>
-        {/* <h1 className='mb-4'>{user.username}'s Assignments</h1> */}
-        {assignments}
+        {list}
       </>
     )
   }

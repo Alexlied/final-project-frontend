@@ -25,8 +25,7 @@ class Container extends React.Component {
 
   async componentDidMount() {
     const profile = await auth.profile()
-    console.log(profile)
-    this.setState({userAssignments: profile.user.assignments})
+    this.setState({ assignments: profile.user.assignments })
   }
 
   async createAssignment(assignment) {
@@ -42,7 +41,7 @@ class Container extends React.Component {
     const { currentUserId, history, refreshUsers } = this.props
 
     await assignments.destroyAssignment({ user: { _id: currentUserId }, assignment })
-    await refreshUsers()
+    //await refreshUsers()
 
     history.push(`/`)
   }
@@ -51,7 +50,7 @@ class Container extends React.Component {
     const { currentUserId, history, refreshUsers } = this.props
 
     await assignments.updateAssignment({ user: { _id: currentUserId }, assignment })
-    await refreshUsers()
+    //await refreshUsers()
 
     history.push(`/`)
   }
@@ -61,12 +60,26 @@ class Container extends React.Component {
     const { assignments } = this.state
     return (
       <>
+        {/* <Route
+          path="/"
+          exact
+          component={({ match }) => {
+            const user = users.find(user => user._id === match.params.userId)
+            return (
+              <List
+                currentUserId={currentUserId}
+                destroyAssignment={this.destroyAssignment}
+                //user={user} 
+                assignments={assignments} />
+            )
+          }}
+        /> */}
         <Route
           path="/"
           exact
           component={() => <List currentUserId={currentUserId}
             destroyAssignment={this.destroyAssignment}
-            user={assignments} />}
+            assignments={assignments} />}
         />
         {/* <Route path='/students/:userId/assignments' exact component={({ match }) => {
           const user = users.find(user => user._id === match.params.userId)
