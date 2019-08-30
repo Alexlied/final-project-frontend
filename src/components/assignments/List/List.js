@@ -3,7 +3,7 @@ import React from 'react'
 import Actions from './List.Actions'
 
 export default ({ currentUserId, destroyAssignment, user }) => {
-  const assignments = user.assignments.map(assignment => (
+  const assignments = user.map(assignment => (
     <div key={assignment._id} className='card'>
       <div className='card-body'>
         {/* <p className='card-text'>{assignment.content}</p>
@@ -25,14 +25,15 @@ export default ({ currentUserId, destroyAssignment, user }) => {
   if (assignments.length === 0) {
     return (
       <>
-        <h1 className='mb-4'>{user.username}'s Assignments</h1>
-        <p>No assignments found</p>
+        {/* <h1 className='mb-4'>{user.username}'s Assignments</h1> */}
+        <p>No assignments found</p>'
+        <p>{assignments}</p>
       </>
     )
   } else {
     return (
       <>
-        <h1 className='mb-4'>{user.username}'s Assignments</h1>
+        {/* <h1 className='mb-4'>{user.username}'s Assignments</h1> */}
         {assignments}
       </>
     )

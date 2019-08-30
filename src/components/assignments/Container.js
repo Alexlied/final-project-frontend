@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom'
 
 // Helpers
 import * as assignments from '../../api/assignments'
+import * as auth from '../../api/auth'
 
 // Components
 import List from './List/List'
@@ -13,16 +14,26 @@ import NewForm from './Form/New.Form'
 class Container extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      assignments: []
+    }
+
     this.createAssignment = this.createAssignment.bind(this)
     this.destroyAssignment = this.destroyAssignment.bind(this)
     this.editAssignment = this.editAssignment.bind(this)
+  }
+
+  async componentDidMount() {
+    const profile = await auth.profile()
+    console.log(profile)
+    this.setState({userAssignments: profile.user.assignments})
   }
 
   async createAssignment(assignment) {
     const { currentUserId, history, refreshUsers } = this.props
 
     await assignments.createAssignment({ user: { _id: currentUserId }, assignment })
-    await refreshUsers()
+    //await refreshUsers()
 
     history.push(`/`)
   }
@@ -47,15 +58,16 @@ class Container extends React.Component {
 
   render() {
     const { currentUserId, users } = this.props
+    const { assignments } = this.state
     return (
       <>
-        {/* <Route
+        <Route
           path="/"
           exact
           component={() => <List currentUserId={currentUserId}
             destroyAssignment={this.destroyAssignment}
-            user={users} />}
-        /> */}
+            user={assignments} />}
+        />
         {/* <Route path='/students/:userId/assignments' exact component={({ match }) => {
           const user = users.find(user => user._id === match.params.userId)
           return (
