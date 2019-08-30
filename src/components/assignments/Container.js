@@ -32,7 +32,7 @@ class Container extends React.Component {
     const { currentUserId, history, refreshUsers } = this.props
 
     await assignments.createAssignment({ user: { _id: currentUserId }, assignment })
-    //await refreshUsers()
+    window.location.reload(false);
 
     history.push(`/`)
   }
@@ -41,7 +41,7 @@ class Container extends React.Component {
     const { currentUserId, history, refreshUsers } = this.props
 
     await assignments.destroyAssignment({ user: { _id: currentUserId }, assignment })
-    //await refreshUsers()
+    window.location.reload(false);
 
     history.push(`/`)
   }
@@ -50,7 +50,6 @@ class Container extends React.Component {
     const { currentUserId, history, refreshUsers } = this.props
 
     await assignments.updateAssignment({ user: { _id: currentUserId }, assignment })
-    //await refreshUsers()
 
     history.push(`/`)
   }
@@ -60,20 +59,7 @@ class Container extends React.Component {
     const { assignments } = this.state
     return (
       <>
-        {/* <Route
-          path="/"
-          exact
-          component={({ match }) => {
-            const user = users.find(user => user._id === match.params.userId)
-            return (
-              <List
-                currentUserId={currentUserId}
-                destroyAssignment={this.destroyAssignment}
-                //user={user} 
-                assignments={assignments} />
-            )
-          }}
-        /> */}
+
         <Route
           path="/"
           exact
@@ -81,23 +67,14 @@ class Container extends React.Component {
             destroyAssignment={this.destroyAssignment}
             assignments={assignments} />}
         />
-        {/* <Route path='/students/:userId/assignments' exact component={({ match }) => {
-          const user = users.find(user => user._id === match.params.userId)
-          return (
-            <List
-              currentUserId={currentUserId}
-              destroyAssignment={this.destroyAssignment}
-              user={user} />
-          )
-        }} /> */}
+
         <Route path='/assignments/new' exact component={() => {
           return <NewForm onSubmit={this.createAssignment} />
         }} />
-        {/* <Route path='/students/:userId/assignments/:postId/edit' exact component={({ match }) => {
-          const user = users.find(user => user._id === match.params.userId)
-          const assignment = user.assignments.find(user => user._id === match.params.postId)
+        <Route path='/assignments/:assignmentId/edit' exact component={({ match }) => {
+          const assignment = this.state.assignments.find(assignment => assignment._id === match.params.assignmentId)
           return <EditForm onSubmit={this.editAssignment} assignment={assignment} />
-        }} /> */}
+        }} />
       </>
     )
   }

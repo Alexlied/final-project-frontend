@@ -10,12 +10,11 @@ export default ({ currentUserId, destroyAssignment, assignments }) => {
         <p className='card-text'>{assignment.description}</p>
         <p className='card-text'><a href={assignment.link}>Project Link</a></p>
       </div>
-      {/* <Actions
+      <Actions
         currentUserId={currentUserId}
-        destroyPost={destroyAssignment}
+        destroyAssignment={destroyAssignment}
         assignment={assignment}
-        user={user}
-         /> */}
+         />
     </div>
   ))
 

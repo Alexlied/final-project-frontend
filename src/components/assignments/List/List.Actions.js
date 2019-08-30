@@ -1,13 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default ({ currentUserId, destroyAssignment, assignment, user }) => (
+export default ({ currentUserId, destroyAssignment, assignment }) => (
   <div className='card-footer text-muted d-flex justify-content-around'>
     {
-      currentUserId === user._id
-      && (
+      (
         <>
-          <Link className='btn btn-link' to={`/students/${user._id}/assignments/${assignment._id}/edit`}>Edit Assignment</Link>
+          <Link className='btn btn-link' to={`/students/${currentUserId}/assignments/${assignment._id}/edit`}>Edit Assignment</Link>
           <button
             className='btn btn-link text-danger'
             onClick={() => destroyAssignment(assignment)}>

@@ -17,3 +17,9 @@ export const updateAssignment = ({ user, assignment }) => {
   const options = { body: assignment, method: 'PUT' }
   return request(path, options)
 }
+
+export const getAssignment = (currentUserId) => {
+  const path = `/api/students/${currentUserId}/assignments`
+  const options = { method: 'GET' }
+  return request(path, options)
+}

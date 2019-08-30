@@ -29,8 +29,6 @@ export default class Container extends React.Component {
     this.setState({ users: response })
   }
 
-  //TODO: refresh current user?
-
   render () {
     const { currentUserId } = this.props
     const { users, loading } = this.state
